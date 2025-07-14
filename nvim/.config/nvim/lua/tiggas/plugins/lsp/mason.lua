@@ -20,19 +20,19 @@ return {
       },
     })
 
-    mason_lspconfig.setup({
-      ensure_installed = {
-        "ts_ls",
-        "eslint",
-        "html",
-        "cssls",
-        "lua_ls",
-        "graphql",
-        "emmet_ls",
-        "elixirls",
-      },
-      automatic_installation = true,
-    })
+    -- mason_lspconfig.setup({
+    --   ensure_installed = {
+    --     "ts_ls",
+    --     "eslint",
+    --     "html",
+    --     "cssls",
+    --     "lua_ls",
+    --     "graphql",
+    --     "emmet_ls",
+    --     "elixirls",
+    --   },
+    --   automatic_installation = true,
+    -- })
 
     mason_tool_installer.setup({
       ensure_installed = {
