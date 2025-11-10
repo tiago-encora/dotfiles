@@ -12,24 +12,24 @@ opts.softtabstop = 2
 opts.shiftwidth = 2
 
 -- line wrapping
-opts.wrap = false -- able line wrapping
+opts.wrap = false
 
 -- cursor line
-opts.cursorline = true -- highlight the current cursor line
+opts.cursorline = true
 
 -- search settings
-opts.ignorecase = true -- ignore case when searching
-opts.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
+opts.ignorecase = true
+opts.smartcase = true
 
 -- backspace
-opts.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
+opts.backspace = "indent,eol,start"
 
 -- turn on termguicolors
 opts.termguicolors = true
 opts.background = "dark"
 opts.signcolumn = "yes"
 
--- more "natural" spliting behavior
+-- spliting behavior
 opts.splitbelow = true
 opts.splitright = true
 
@@ -42,3 +42,6 @@ opts.wildignore = opts.wildignore .. "*/node_modules/*"
 -- keep undo history in the disk so it persists between sessions
 opts.undofile = true
 opts.undodir = vim.fn.expand("~/.cache/undodir")
+
+-- session options for autosession plugin
+opts.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
