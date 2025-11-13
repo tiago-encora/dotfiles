@@ -42,6 +42,17 @@ vim.keymap.set("n", "<leader>pb", ":Pick buffers<CR>")
 vim.keymap.set("n", "<leader>db", function() vim.diagnostic.open_float({ scope = "buffer" }) end)
 vim.keymap.set("n", "<leader>yr", ':let @+ = expand("%")<CR>', {})
 
+-- macros
+local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
+
+vim.api.nvim_create_augroup("JSLogMacro", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  group = "JSLogMacro",
+  callback = function()
+    vim.fn.setreg("l", "yoconsole.log('" .. esc .. "pa:'," .. esc .. "pa)" .. esc .. "")
+  end,
+})
+
 vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
 
@@ -52,6 +63,7 @@ vim.pack.add({
 
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/mason-org/mason.nvim" },
+  { src = "https://github.com/prettier/vim-prettier" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/L3MON4D3/LuaSnip" },
@@ -73,6 +85,16 @@ require("luasnip.loaders.from_vscode").lazy_load()
 require "blink.cmp".setup({
   fuzzy = {
     implementation = 'lua'
+  },
+  keymap = {
+    preset = 'none',
+    ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+    ['<C-e>'] = { 'hide', 'fallback' },
+
+    ['<CR>'] = { 'select_and_accept', 'fallback' },
+
+    ['<C-k>'] = { 'select_prev', 'fallback' },
+    ['<C-j>'] = { 'select_next', 'fallback' },
   }
 })
 
@@ -132,3 +154,10 @@ vim.lsp.config("lua_ls", {
     }
   }
 })
+
+-- format js files on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+  command = "silent! Prettier",
+})
+
