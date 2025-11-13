@@ -103,6 +103,10 @@ require "mini.pick".setup({
     content_from_bottom = true,
     use_cache = true,
   },
+  mappings = {
+    scroll_down  = '<C-k>',
+    scroll_up    = '<C-j>',
+  }
 })
 
 require "snipe".setup({
