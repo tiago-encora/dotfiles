@@ -104,8 +104,8 @@ require "mini.pick".setup({
     use_cache = true,
   },
   mappings = {
-    scroll_down  = '<C-k>',
-    scroll_up    = '<C-j>',
+    move_up   = '<C-k>',
+    move_down = '<C-j>',
   }
 })
 
@@ -164,4 +164,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
   command = "silent! Prettier",
 })
-
