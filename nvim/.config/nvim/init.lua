@@ -31,6 +31,7 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 
 vim.o.ai = true
 
+-- keymaps
 vim.keymap.set("n", "<leader>w", ":write<CR>")
 vim.keymap.set("n", "<leader>q", ":quit<CR>")
 vim.keymap.set("n", "<leader>nh", ":nohl<CR>")
@@ -40,7 +41,7 @@ vim.keymap.set("n", "<leader>pf", ":Pick files<CR>")
 vim.keymap.set("n", "<leader>pg", ":Pick grep_live<CR>")
 vim.keymap.set("n", "<leader>pb", ":Pick buffers<CR>")
 vim.keymap.set("n", "<leader>db", function() vim.diagnostic.open_float({ scope = "buffer" }) end)
-vim.keymap.set("n", "<leader>yr", ':let @+ = expand("%")<CR>', {})
+vim.keymap.set("n", "<leader>yr", ':let @+ = expand("%:.")<CR>', {})
 
 -- macros
 local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
@@ -55,6 +56,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
+  { src = "https://github.com/rmagatti/auto-session" },
 
   { src = "https://github.com/vague-theme/vague.nvim" },
   { src = "https://github.com/nvim-mini/mini.icons" },
@@ -68,16 +70,21 @@ vim.pack.add({
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/L3MON4D3/LuaSnip" },
   { src = "https://github.com/rafamadriz/friendly-snippets" },
+  { src = "https://github.com/lewis6991/gitsigns.nvim" },
+  { src = "https://github.com/scalameta/nvim-metals" },
 
   { src = "https://github.com/mikavilpas/yazi.nvim" },
   { src = "https://github.com/leath-dub/snipe.nvim" },
   { src = "https://github.com/nvim-mini/mini.pick" },
+
+  { src = "https://github.com/github/copilot.vim" },
 })
 
 require "vague".setup()
 vim.cmd("colorscheme vague")
 
 require "yazi".setup({})
+require "auto-session".setup({})
 require "mason".setup()
 require "smear_cursor".setup()
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -141,6 +148,10 @@ require 'nvim-treesitter.configs'.setup({
     "c",
     "elixir",
   },
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
   ignore_install = {},
   sync_install = true,
   auto_install = true,
@@ -148,7 +159,8 @@ require 'nvim-treesitter.configs'.setup({
 })
 
 -- lsp
-vim.lsp.enable({ "lua_ls", "ts_ls" })
+vim.lsp.enable({ "lua_ls", "ts_ls", "elixirls" })
+
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
@@ -158,9 +170,24 @@ vim.lsp.config("lua_ls", {
     }
   }
 })
+vim.lsp.config("elixirls", {
+  cmd = { "/home/tiago-cardoso/lsp/elixir/language_server.sh" },
+  filetypes = { "elixir", "eelixir", "heex", "surface" },
+  root_markers = { "mix.exs", ".git" },
+})
+
+-- format elixir files on save
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = {"*.ex", "*.exs"},
+  callback = function()
+    vim.cmd("silent! !mix format " .. vim.fn.expand("%"))
+    vim.cmd("edit!")
+  end,
+})
 
 -- format js files on save
-vim.api.nvim_create_autocmd("BufWritePre", {
+vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
   command = "silent! Prettier",
 })
+
