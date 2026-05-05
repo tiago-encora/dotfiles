@@ -57,6 +57,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
   { src = "https://github.com/rmagatti/auto-session" },
+  { src = "https://github.com/ruifm/gitlinker.nvim" },
 
   { src = "https://github.com/vague-theme/vague.nvim" },
   { src = "https://github.com/nvim-mini/mini.icons" },
@@ -85,6 +86,7 @@ vim.cmd("colorscheme vague")
 
 require "yazi".setup({})
 require "auto-session".setup({})
+require "gitlinker".setup()
 require "mason".setup()
 require "smear_cursor".setup()
 require("luasnip.loaders.from_vscode").lazy_load()
