@@ -72,22 +72,32 @@ vim.pack.add({
   { src = "https://github.com/L3MON4D3/LuaSnip" },
   { src = "https://github.com/rafamadriz/friendly-snippets" },
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
-  { src = "https://github.com/scalameta/nvim-metals" },
+  {
+    src = 'https://github.com/JavaHello/spring-boot.nvim',
+    version = '218c0c26c14d99feca778e4d13f5ec3e8b1b60f0',
+  },
+  'https://github.com/MunifTanjim/nui.nvim',
+  'https://github.com/mfussenegger/nvim-dap',
+
+  'https://github.com/nvim-java/nvim-java',
 
   { src = "https://github.com/mikavilpas/yazi.nvim" },
   { src = "https://github.com/leath-dub/snipe.nvim" },
   { src = "https://github.com/nvim-mini/mini.pick" },
 
   { src = "https://github.com/github/copilot.vim" },
+  { src = "https://github.com/kevalin/mermaid.nvim" },
 })
 
 require "vague".setup()
 vim.cmd("colorscheme vague")
 
+require "mermaid".setup()
 require "yazi".setup({})
 require "auto-session".setup({})
 require "gitlinker".setup()
 require "mason".setup()
+require('java').setup()
 require "smear_cursor".setup()
 require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -149,6 +159,7 @@ require 'nvim-treesitter.configs'.setup({
     "vimdoc",
     "c",
     "elixir",
+    "java",
   },
   highlight = {
     enable = true,
@@ -161,7 +172,7 @@ require 'nvim-treesitter.configs'.setup({
 })
 
 -- lsp
-vim.lsp.enable({ "lua_ls", "ts_ls", "elixirls" })
+vim.lsp.enable({ "lua_ls", "ts_ls", "elixirls", "jdtls" })
 
 vim.lsp.config("lua_ls", {
   settings = {

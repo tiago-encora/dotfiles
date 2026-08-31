@@ -32,6 +32,10 @@
       "rev": "ad7146a",
       "src": "https://github.com/mason-org/mason.nvim"
     },
+    "mermaid.nvim": {
+      "rev": "6a1b40c",
+      "src": "https://github.com/kevalin/mermaid.nvim"
+    },
     "mini.icons": {
       "rev": "ff2e4f1",
       "src": "https://github.com/nvim-mini/mini.icons"
@@ -40,9 +44,21 @@
       "rev": "08a7220",
       "src": "https://github.com/nvim-mini/mini.pick"
     },
+    "nui.nvim": {
+      "rev": "10fc361",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
     "nvim-cmp": {
       "rev": "106c4bc",
       "src": "https://github.com/hrsh7th/nvim-cmp"
+    },
+    "nvim-dap": {
+      "rev": "9e848e0",
+      "src": "https://github.com/mfussenegger/nvim-dap"
+    },
+    "nvim-java": {
+      "rev": "9e8b842",
+      "src": "https://github.com/nvim-java/nvim-java"
     },
     "nvim-lspconfig": {
       "rev": "2010fc6",
@@ -71,6 +87,11 @@
     "snipe.nvim": {
       "rev": "d2d196c",
       "src": "https://github.com/leath-dub/snipe.nvim"
+    },
+    "spring-boot.nvim": {
+      "rev": "218c0c2",
+      "src": "https://github.com/JavaHello/spring-boot.nvim",
+      "version": "'218c0c26c14d99feca778e4d13f5ec3e8b1b60f0'"
     },
     "todo-comments.nvim": {
       "rev": "31e3c38",
