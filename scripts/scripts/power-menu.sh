@@ -1,33 +1,31 @@
 #!/bin/bash
 
-# Define the menu options
-options="Power Off\nReboot\nSuspend\nHibernate\nLogout\nLock"
+options=" Power Off
+ Reboot
+ Suspend
+ Hibernate
+ Lock
+ Logout"
 
-# Show the menu using rofi
-chosen=$(echo -e "$options" | tr '[:upper:]' '[:lower:]' | rofi -dmenu -p "")
+chosen=$(echo -e "$options" | dmenu -i -p "Power Menu:")
 
-# Execute the selected action
 case "$chosen" in
-    "power off")
+    " Power Off")
         systemctl poweroff
         ;;
-    "reboot")
+    " Reboot")
         systemctl reboot
         ;;
-    "suspend")
+    " Suspend")
         systemctl suspend
         ;;
-    "hibernate")
+    " Hibernate")
         systemctl hibernate
         ;;
-    "logout")
-        pkill -KILL -u $USER
+    " Lock")
+        i3lock
         ;;
-    "lock")
-        i3lock || betterlockscreen -l || slock
-        ;;
-    *)
-        echo "No valid option selected."
+    " Logout")
+        pkill -KILL -u "$USER"
         ;;
 esac
-

@@ -97,7 +97,7 @@ require "yazi".setup({})
 require "auto-session".setup({})
 require "gitlinker".setup()
 require "mason".setup()
-require('java').setup()
+require("java").setup()
 require "smear_cursor".setup()
 require("luasnip.loaders.from_vscode").lazy_load()
 
